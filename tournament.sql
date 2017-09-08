@@ -8,10 +8,17 @@
 
 
 create database tournament;
+	
 create table game (player_id serial, 
 				   player_name text,
-				   
-					)
+				   player_wins integer,
+				   player_matches integer
+				   );
+
+
+
+
+
 
 
 
