@@ -52,7 +52,7 @@ def registerPlayer(name):
 
     conn = connect()
     c = conn.cursor()
-    c.execute("INSERT INTO players ")
+    c.execute("INSERT INTO players (name) VALUES (%s);", (name,))
     conn.commit()
     conn.close()
 
@@ -71,6 +71,15 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
+
+    conn = connect()
+    c = conn.cursor()
+    c.execute("    ")
+    conn.commit()
+    conn.close()
+
+
+
 
 
 def reportMatch(winner, loser):
@@ -97,5 +106,6 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
+
 
 

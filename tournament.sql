@@ -14,7 +14,7 @@ CREATE DATABASE tournament;
 \c tournament;
 
 
-CREATE TABLE IF NOT EXISTS players (player_ID serial PRIMARY KEY, player_name text,);
+CREATE TABLE IF NOT EXISTS players (id serial PRIMARY KEY, name text);
 
 CREATE TABLE IF NOT EXISTS matches ();
 
