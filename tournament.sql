@@ -7,13 +7,19 @@
 -- these lines here.
 
 
-create database tournament;
-	
-create table game (player_id serial, 
-				   player_name text,
-				   player_wins integer,
-				   player_matches integer
-				   );
+DROP DATABASE IF EXISTS tournament;
+
+CREATE DATABASE tournament;
+
+\c tournament;
+
+
+CREATE TABLE IF NOT EXISTS players (player_ID serial PRIMARY KEY, player_name text,);
+
+CREATE TABLE IF NOT EXISTS matches ();
+
+
+
 
 
 
