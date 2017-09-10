@@ -34,7 +34,7 @@ def countPlayers():
 
     conn = connect()
     c = conn.cursor()
-    c.execute("SELECT count(player_name) from table")
+    c.execute("SELECT count(name) from players")
     conn.commit()
     conn.close()
 
@@ -74,11 +74,22 @@ def playerStandings():
 
     conn = connect()
     c = conn.cursor()
-    c.execute("    ")
+    q = """
+        SELECT players.id, players.name, winnings.wins, matches_played.matches 
+        FROM players 
+        LEFT JOIN winnings ON players.id = winnings.player 
+        LEFT JOIN matches_played ON players.id = matches_played.player 
+        GROUP BY players.id, players.name, winnings.wins, matches_played.matches
+        ORDER BY winnings.wins DESC
+
+        """
+
+    c.execute(q)
     conn.commit()
+    returnList = c.fetchall()
     conn.close()
 
-
+    return returnlist 
 
 
 
@@ -88,7 +99,14 @@ def reportMatch(winner, loser):
     Args:
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
+
     """
+
+    conn = connect()
+    c = conn.cursor()
+    c.execute("INSERT INTO matches (winner, loser) VALUES (%s, %s);", (winner, loser))
+    conn.commit()
+    conn.close()
  
  
 def swissPairings():
@@ -106,6 +124,28 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
+standings = playerStandings()
+
+pool = return [standings[i:i + 2] for i in range(0, len(standings), 2)]
+
+matched_pairs = list()
+
+for pairs in pool
+    pairing = list()
+    for player in pair
+        pairing.append(player[0])
+        pairing.append(player[1])
+    matched_pairs.append(pairing)
+
+
+return matched_pairs
+
+
+
+
+
+
+
 
 
 
