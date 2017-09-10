@@ -17,7 +17,7 @@ def deleteMatches():
     """Remove all the match records from the database."""
     conn = connect()
     c = conn.cursor()
-    c.execute("TRUNCATE TABLE matches")
+    c.execute("DELETE FROM matches")
     conn.commit()
     conn.close()
 
@@ -25,7 +25,7 @@ def deletePlayers():
     """Remove all the player records from the database."""
     conn = connect()
     c = conn.cursor()
-    c.execute("TRUNCATE TABLE players")
+    c.execute("DELETE FROM players")
     conn.commit()
     conn.close()
 
@@ -34,9 +34,12 @@ def countPlayers():
 
     conn = connect()
     c = conn.cursor()
-    c.execute("SELECT count(name) from players")
+    c.execute("SELECT count(name) as num from players")
     conn.commit()
+    returnList = int(c.fetchone()[0])
     conn.close()
+
+    return returnList
 
 
 def registerPlayer(name):
@@ -89,7 +92,7 @@ def playerStandings():
     returnList = c.fetchall()
     conn.close()
 
-    return returnlist 
+    return returnList 
 
 
 
@@ -124,26 +127,20 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-standings = playerStandings()
+    standings = playerStandings()
 
-pool = return [standings[i:i + 2] for i in range(0, len(standings), 2)]
+    pool = [standings[i:i + 2] for i in range(0, len(standings), 2)]
 
-matched_pairs = list()
+    matched_pairs = list()
 
-for pairs in pool
-    pairing = list()
-    for player in pair
-        pairing.append(player[0])
-        pairing.append(player[1])
-    matched_pairs.append(pairing)
+    for pair in pool:
+        pairing = list()
+        for player in pair:
+            pairing.append(player[0])
+            pairing.append(player[1])
+        matched_pairs.append(pairing)
 
-
-return matched_pairs
-
-
-
-
-
+    return matched_pairs
 
 
 
