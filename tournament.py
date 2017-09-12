@@ -5,12 +5,10 @@
 
 import psycopg2
 
-
 def connect():
 
     """Connect to the PostgreSQL database.  Returns a database connection."""
     return psycopg2.connect("dbname=tournament")
-
 
 def deleteMatches():
 
@@ -41,7 +39,6 @@ def countPlayers():
 
     return returnList
 
-
 def registerPlayer(name):
 
     """Adds a player to the tournament database.
@@ -58,8 +55,6 @@ def registerPlayer(name):
     c.execute("INSERT INTO players (name) VALUES (%s);", (name,))
     conn.commit()
     conn.close()
-
-
 
 def playerStandings():
     """Returns a list of the players and their win records, sorted by wins.
@@ -86,15 +81,12 @@ def playerStandings():
         ORDER BY winnings.wins DESC
 
         """
-
     c.execute(q)
     conn.commit()
     returnList = c.fetchall()
     conn.close()
 
     return returnList 
-
-
 
 def reportMatch(winner, loser):
     """Records the outcome of a single match between two players.
@@ -110,7 +102,6 @@ def reportMatch(winner, loser):
     c.execute("INSERT INTO matches (winner, loser) VALUES (%s, %s);", (winner, loser))
     conn.commit()
     conn.close()
- 
  
 def swissPairings():
     """Returns a list of pairs of players for the next round of a match.
@@ -128,21 +119,12 @@ def swissPairings():
         name2: the second player's name
     """
     standings = playerStandings()
-
     pool = [standings[i:i + 2] for i in range(0, len(standings), 2)]
-
     matched_pairs = list()
-
     for pair in pool:
         pairing = list()
         for player in pair:
             pairing.append(player[0])
             pairing.append(player[1])
         matched_pairs.append(pairing)
-
     return matched_pairs
-
-
-
-
-
