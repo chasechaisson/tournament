@@ -20,7 +20,7 @@ The python file with functions necessary to correctly query the database.
 This is the test file from which you will run to see if all of the functions are correctly querying the database.
 
 
-##Instructions
+## Instructions
 
 1. Download the necessary files for the project [here](https://github.com/chasechaisson/tournament/archive/master.zip)
 
@@ -39,7 +39,7 @@ This should correctly setup your database with the working tables and views.
 
 7. Now let's run the test file tournament_test.py by typing ```python tournament_test.py``` in the command line.
 
-##Results
+## Results
 
 If everything runs smoothly, you should get a return statement in the terminal stating:
 
